@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "squarematrix.h"
 
 using namespace std;
@@ -47,7 +48,83 @@ void fillMatrix(SquareMatrix *matrix)
         }
 }
 
+void showArray(vector<int> arr)
+{
+    int i = 0;
+
+    while(i < arr.size())
+    {
+        for(int n = 0; n < 10; n++)
+        {
+            if(i < arr.size())
+                cout << arr.at(i) << " ";
+            i++;
+        }
+        cout << endl;
+    }
+}
+
 void showSequence(SquareMatrix *matrix)
 {
+    vector<int> array;
 
+    int rhombus_size = 0;
+    int matrix_size = matrix->getSize();
+
+    if(matrix_size % 2 == 0)
+        rhombus_size = matrix_size + 1;
+    else rhombus_size = matrix_size;
+
+    int loops = rhombus_size / 2;
+    int loop_counter = 0;
+
+    int direction_x = -1;
+    int direction_y = -1;
+
+//    int max_x = (matrix_size - 1) / 2;
+//    int max_y = matrix_size - 1;
+
+//    int min_x = max_x - rhombus_size / 2;
+//    int min_y = max_x - rhombus_size / 2;
+
+    int max_index = matrix_size - 1;
+    int min_index = max_index / 2 - rhombus_size / 2;
+
+    while(loops)
+    {
+        int x = max_index / 2;
+        int y = max_index - loop_counter;
+
+        int start_x = x;
+        int start_y = y;
+
+        array.push_back(*matrix->getElement(x, y));
+        //cout << x << ":" << y << endl;
+        x += direction_x;
+        y += direction_y;
+
+        while(x != start_x || y != start_y)
+        {
+            if(x >= 0 && y >= 0)
+                array.push_back(*matrix->getElement(x, y));
+            //cout << x << ":" << y << endl;
+            if(x == max_index - loop_counter) direction_x = -1;
+            if(y == max_index - loop_counter) direction_y = -1;
+            if(x == min_index + loop_counter) direction_x = 1;
+            if(y == min_index + loop_counter) direction_y = 1;
+
+            x += direction_x;
+            y += direction_y;
+        }
+        loop_counter++;
+        loops--;
+
+        direction_x = -1;
+        direction_y = -1;
+    }
+
+    //cout << max_index / 2 << ":" << max_index - loop_counter << endl;
+    array.push_back(*matrix->getElement(max_index / 2, max_index - loop_counter));
+
+    showArray(array);
 }

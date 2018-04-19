@@ -16,7 +16,7 @@ SquareMatrix::~SquareMatrix()
 
 bool SquareMatrix::setSize(int size)
 {
-    if(size > 0 && size < maxSize)
+    if(size > 0 && size <= maxSize)
     {
         _size = size;
         matrix = new int*[_size];
@@ -52,7 +52,7 @@ bool SquareMatrix::isEmpty()
 
 int* SquareMatrix::getElement(int i, int j)
 {
-    return &matrix[i][j];
+    return &matrix[j][i];
 }
 
 //DEBUG!!!
