@@ -54,16 +54,3 @@ int* SquareMatrix::getElement(int i, int j)
 {
     return &matrix[j][i];
 }
-
-//DEBUG!!!
-void SquareMatrix::show()
-{
-    for(int i = 0; i < _size; ++i)
-    {
-        for(int j = 0; j < _size; ++j)
-        {
-            std::cout << matrix[i][j] << " ";
-        }
-        std::cout << "\n";
-    }
-}

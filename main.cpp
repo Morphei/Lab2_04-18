@@ -25,6 +25,7 @@ int main()
     else
     {
         cout << "Задано розмірність " << size << " елементів." << endl << endl;
+        cout << "Варіант 188" << endl << endl;
         fillMatrix(matrix);
         showSequence(matrix);
         cout << endl;
@@ -81,12 +82,6 @@ void showSequence(SquareMatrix *matrix)
     int direction_x = -1;
     int direction_y = -1;
 
-//    int max_x = (matrix_size - 1) / 2;
-//    int max_y = matrix_size - 1;
-
-//    int min_x = max_x - rhombus_size / 2;
-//    int min_y = max_x - rhombus_size / 2;
-
     int max_index = matrix_size - 1;
     int min_index = max_index / 2 - rhombus_size / 2;
 
@@ -99,7 +94,6 @@ void showSequence(SquareMatrix *matrix)
         int start_y = y;
 
         array.push_back(*matrix->getElement(x, y));
-        //cout << x << ":" << y << endl;
         x += direction_x;
         y += direction_y;
 
@@ -107,7 +101,6 @@ void showSequence(SquareMatrix *matrix)
         {
             if(x >= 0 && y >= 0)
                 array.push_back(*matrix->getElement(x, y));
-            //cout << x << ":" << y << endl;
             if(x == max_index - loop_counter) direction_x = -1;
             if(y == max_index - loop_counter) direction_y = -1;
             if(x == min_index + loop_counter) direction_x = 1;
@@ -122,8 +115,6 @@ void showSequence(SquareMatrix *matrix)
         direction_x = -1;
         direction_y = -1;
     }
-
-    //cout << max_index / 2 << ":" << max_index - loop_counter << endl;
     array.push_back(*matrix->getElement(max_index / 2, max_index - loop_counter));
 
     showArray(array);

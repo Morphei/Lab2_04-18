@@ -16,8 +16,6 @@ public:
     int getSize();
     bool isEmpty();
     int *getElement(int i, int j);
-    //DEBUG
-    void show();
 };
 
 #endif // SQUAREMATRIX_H
