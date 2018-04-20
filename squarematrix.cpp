@@ -1,11 +1,6 @@
 #include "squarematrix.h"
 #include <iostream>
 
-SquareMatrix::SquareMatrix()
-{
-
-}
-
 SquareMatrix::~SquareMatrix()
 {
     for(int i = 0; i < _size; ++i) {

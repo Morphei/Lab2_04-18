@@ -10,7 +10,6 @@ private:
     int _size;
 
 public:
-    SquareMatrix();
     ~SquareMatrix();
     bool setSize(int size);
     int getSize();

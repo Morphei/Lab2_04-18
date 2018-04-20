@@ -4,7 +4,7 @@
 
 using namespace std;
 void fillMatrix(SquareMatrix *matrix);
-void showSequence(SquareMatrix *matrix);
+void calculateSequence(SquareMatrix *matrix);
 
 int main()
 {
@@ -18,7 +18,7 @@ int main()
     cin >> size;
     cout << endl;
 
-    if(!matrix->setSize(size))
+    if(!matrix->setSize(size)) //Перевірка на коректність введеногї розмірності
     {
         cout << "Введено некоректну розмірність матриці" << endl;
     }
@@ -27,13 +27,14 @@ int main()
         cout << "Задано розмірність " << size << " елементів." << endl << endl;
         cout << "Варіант 188" << endl << endl;
         fillMatrix(matrix);
-        showSequence(matrix);
+        calculateSequence(matrix);
         cout << endl;
     }
 
     return 0;
 }
 
+//Функція заповнення матриці
 void fillMatrix(SquareMatrix *matrix)
 {
     int size = matrix->getSize();
@@ -49,6 +50,7 @@ void fillMatrix(SquareMatrix *matrix)
         }
 }
 
+//Функція відображення вихідного масиву на екрані
 void showArray(vector<int> arr)
 {
     int i = 0;
@@ -65,7 +67,9 @@ void showArray(vector<int> arr)
     }
 }
 
-void showSequence(SquareMatrix *matrix)
+//Функція обчислення послідовності елементів масиву
+//за заданим алгоритмом
+void calculateSequence(SquareMatrix *matrix)
 {
     vector<int> array;
 
@@ -79,7 +83,7 @@ void showSequence(SquareMatrix *matrix)
     int loops = rhombus_size / 2;
     int loop_counter = 0;
 
-    int direction_x = -1;
+    int direction_x = -1; //Змінні, що визначають напрям руху по х та у
     int direction_y = -1;
 
     int max_index = matrix_size - 1;
@@ -90,9 +94,12 @@ void showSequence(SquareMatrix *matrix)
         int x = max_index / 2;
         int y = max_index - loop_counter;
 
+        //Визначаємо стартову позицію
         int start_x = x;
         int start_y = y;
 
+        //Додаємо перший елемент в послідовність, і йдемо в циклі по ромбу, поки не дійдемо
+        //до стартової позиції
         array.push_back(*matrix->getElement(x, y));
         x += direction_x;
         y += direction_y;
@@ -101,6 +108,7 @@ void showSequence(SquareMatrix *matrix)
         {
             if(x >= 0 && y >= 0)
                 array.push_back(*matrix->getElement(x, y));
+            // Визначаємо напрям руху, якщо дійшли до мінімальних чи максимальних індексів
             if(x == max_index - loop_counter) direction_x = -1;
             if(y == max_index - loop_counter) direction_y = -1;
             if(x == min_index + loop_counter) direction_x = 1;
@@ -115,6 +123,8 @@ void showSequence(SquareMatrix *matrix)
         direction_x = -1;
         direction_y = -1;
     }
+
+    //Додавання останнього центрального елементу послідовності
     array.push_back(*matrix->getElement(max_index / 2, max_index - loop_counter));
 
     showArray(array);
