@@ -5,12 +5,10 @@ class SquareMatrix
 {
 private:
     const int maxSize = 30;
-
-    int** matrix;
     int _size;
+    int matrix[30][30];
 
 public:
-    ~SquareMatrix();
     bool setSize(int size);
     int getSize();
     bool isEmpty();
